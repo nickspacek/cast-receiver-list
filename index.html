@@ -1,0 +1,17 @@
+<html ng-app="app">
+	<head>
+		
+
+		<script src="angular.min.js"></script>
+		<script>
+			angular.module('app', [ 'crl' ]);
+			angular.module('crl', [])
+				.controller('crl.ReceiverCtrl', [ '$scope', function($scope) {
+					$scope.receivers = [ { name: 'test', id: "1241421asf", ip: "10.80.80.165"  } ];
+				}]);
+		</script>
+	</head>
+	<body>
+		<div ng-include src="'cast-receiver-list.html'" />
+	</body>
+</html>

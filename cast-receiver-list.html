@@ -1,0 +1,25 @@
+<div ng-controller="crl.ReceiverCtrl">
+	<p class="crl-empty" ng-hide="receivers">No receivers found. Would you like to
+		<button class="crl-refresh btn btn-xs">Refresh</button>
+	</p>
+	<div class="crl-receivers" ng-show="receivers">
+		<ol class="crl-receiver-list list-group">
+			<li class="crl-receiver" data-id="{{receiver.id}}" ng-repeat="receiver in receivers">
+				<a class="list-group-item" href="#">
+					<div class="crl-receiver-identicon pull-left">
+						<canvas width="40" height="40"></canvas>
+					</div>
+					<h4 class="crl-receiver-name list-group-item-heading">{{receiver.name}}</h4>
+					<div class="crl-receiver-info list-group-item-text">
+						<small class="crl-receiver-info-ip text-muted">{{receiver.ip}}</small>
+					</div>
+				</a>
+			</li>
+		</ol>
+		<p class="crl-receiver-count-message text-muted">
+			<span class="crl-receiver-count">{{receivers.length}}</span>
+			receivers found on the network
+		</p>
+	</div>
+</div>
+
