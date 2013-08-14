@@ -1,17 +1,50 @@
-<html ng-app="app">
+<html ng-app="app" data-cast-api-enabled="true">
 	<head>
-		
+		<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="ng-cast-receiver-list.css" rel="stylesheet" />
 
 		<script src="angular.min.js"></script>
+		<script src="ng-cast-receiver-list.js"></script>
 		<script>
-			angular.module('app', [ 'crl' ]);
-			angular.module('crl', [])
-				.controller('crl.ReceiverCtrl', [ '$scope', function($scope) {
-					$scope.receivers = [ { name: 'test', id: "1241421asf", ip: "10.80.80.165"  } ];
+			angular.module('crl').constant('CAST_APP_ID', 'ae241d56-0944-42ed-b6eb-06c314f5b5a0');
+			angular.module('app', [ 'crl' ])
+				.factory('castApi', [ '$window', function (window) {	
+					var castProxy = {
+						api: null,
+						callbacks: [],
+						ready: function (callback) {
+							if (this.api) {
+								callback(this.api);
+							}
+							else {
+								this.callbacks.push(callback);
+							}
+						},
+						flush: function () {
+							var api = this.api = new cast.Api();
+							this.callbacks.forEach(function (callback) {
+								callback(api);
+							});
+						}
+					};
+
+					if (typeof cast !== 'undefined' && cast.isAvailable) {
+						castProxy.flush();
+					} else {
+						window.addEventListener("message", function(event) {
+							if (event.source == window && event.data && event.data.source === "CastApi" && event.data.event === "Hello") {
+								castProxy.flush();
+							}
+						});
+					}
+					
+					return castProxy;
 				}]);
 		</script>
 	</head>
 	<body>
-		<div ng-include src="'cast-receiver-list.html'" />
+		<div class="container">
+			<div class="row" ng-include src="'cast-receiver-list.html'" />
+		</div>
 	</body>
 </html>
