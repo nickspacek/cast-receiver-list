@@ -1,0 +1,9 @@
+ol.crl-receiver-list {
+	list-style: none;
+}
+
+.crl-receiver-identicon {
+	background-color: white;
+	border-radius: 3px;
+	margin-right: .5em;
+}
