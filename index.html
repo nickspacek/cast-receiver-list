@@ -1,41 +1,87 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap.min.css" rel="stylesheet" />
-</head>
-<body>
-	<div class="container">
-	<h1>Examples</h1>
-	<h2>Angular JS</h2>
-	<p>
-		How to use the module in your own Angular application
-	</p>
-	<ol>
-		<li>
-			<strong>Include the CSS:</strong>
-			<pre>
-&lt;script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"&gt;&lt;/script&gt;</pre>
-		</li>
-		<li>
-			<strong>Include the JS:</strong>
-			<pre>
-&lt;script src="ng-cast-receiver-list.js"&gt;&lt;/script&gt;</pre>
-		</li>
-		<li>
-			<strong>Configure the module with your Application ID:</strong>
-			<pre>
-&lt;script&gt;angular.module('crl').constant('CAST_APP_ID', 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx');&lt;/script&gt;</pre>
-		</li>
-		<li>
-			<strong>Register the module as a dependency for your Angular module:</strong>
-			<pre>
-&lt;script&gt;angular.module('app', [ 'crl' ]);&lt;/script&gt;</pre>
-		</li>
-	</ol>
-	<p>
-		<a href="angular.html">Click here to try it out</a>
-		<small>(You will need to <a href="https://developers.google.com/cast/whitelisting" target="_blank">whitelist nickspacek.github.io</a> in your Chrome Cast Extension options)</small>
-	</p>
-	</div>
-</body>
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>cast-receiver-list by nickspacek</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">cast-receiver-list</h1>
+        <p class="header">jQuery and Angular JS plugin to display and select Google Cast receivers</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/nickspacek/cast-receiver-list/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/nickspacek/cast-receiver-list/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/nickspacek/cast-receiver-list">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/nickspacek">nickspacek</a></p>
+
+
+      </header>
+      <section>
+        <h1>
+<a name="cast-receiver-list" class="anchor" href="#cast-receiver-list"><span class="octicon octicon-link"></span></a>cast-receiver-list</h1>
+
+<p>jQuery/Angular JS plugin to display and select Google Cast receivers</p>
+
+<h2>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
+
+<ul>
+<li>jQuery</li>
+<li>(Optional) Bootstrap</li>
+</ul><h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Currently, the easiest way to use this plugin is to have a container div like so:</p>
+
+<pre><code>&lt;div id="#container" /&gt;
+</code></pre>
+
+<p>And call the plugin on it:</p>
+
+<pre><code>$('#container').receiverList({
+  api: castApiInstance,
+  appId: castAppId
+});
+</code></pre>
+
+<p>The plugin will register a Receiver Listener with the Google Cast API.</p>
+
+<h2>
+<a name="plans" class="anchor" href="#plans"><span class="octicon octicon-link"></span></a>Plans</h2>
+
+<ul>
+<li>Add hooks to manually update the list, so that the plugin itself isn't registering with the Cast API</li>
+<li>Add tracking of current Cast sessions and ability to Start/Stop Cast sessions</li>
+</ul>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		          <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-10529487-3");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
 </html>
