@@ -1,10 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
+	<div class="container">
 	<h1>Examples</h1>
 	<h2>Angular JS</h2>
+	<p>
+		How to use the module in your own Angular application
+	</p>
+	<ol>
+		<li>
+			<strong>Include the CSS:</strong>
+			<pre>
+&lt;script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"&gt;&lt;/script&gt;</pre>
+		</li>
+		<li>
+			<strong>Include the JS:</strong>
+			<pre>
+&lt;script src="ng-cast-receiver-list.js"&gt;&lt;/script&gt;</pre>
+		</li>
+		<li>
+			<strong>Configure the module with your Application ID:</strong>
+			<pre>
+&lt;script&gt;angular.module('crl').constant('CAST_APP_ID', 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx');&lt;/script&gt;</pre>
+		</li>
+		<li>
+			<strong>Register the module as a dependency for your Angular module:</strong>
+			<pre>
+&lt;script&gt;angular.module('app', [ 'crl' ]);&lt;/script&gt;</pre>
+		</li>
+	</ol>
 	<a href="angular.html">Click here to try it out</a>
+	</div>
 </body>
 </html>
