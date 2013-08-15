@@ -4,8 +4,8 @@
 	</p>
 	<div class="crl-receivers" ng-show="receivers">
 		<ol class="crl-receiver-list list-group">
-			<li class="crl-receiver" data-id="{{receiver.id}}" ng-repeat="receiver in receivers">
-				<a class="list-group-item" href="#">
+			<li class="crl-receiver" data-id="{{receiver.id}}" ng-class="{crl-receiver-active: true}" ng-repeat="receiver in receivers">
+				<a class="list-group-item" href="#" ng-click="selectReceiver(receiver.id)">
 					<canvas identicon data-hash="{{receiver.id | md5}}" class="crl-receiver-identicon pull-left" width="40" height="40"></canvas>
 					<h4 class="crl-receiver-name list-group-item-heading">{{receiver.name}}</h4>
 					<div class="crl-receiver-info list-group-item-text">
