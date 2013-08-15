@@ -1,13 +1,13 @@
 cast-receiver-list
 ==================
 
-jQuery plugin to display and select Google Cast receivers
+jQuery/Angular JS plugin to display and select Google Cast receivers
 
 Requirements
 ------------
 
-jQuery
-(Optional) Bootstrap
+* jQuery
+* (Optional) Bootstrap
 
 Usage
 -----
@@ -20,8 +20,8 @@ And call the plugin on it:
 
     $('#container').receiverList({
       api: castApiInstance,
-		appId: castAppId
-	 });
+      appId: castAppId
+    });
 
 The plugin will register a Receiver Listener with the Google Cast API.
 
