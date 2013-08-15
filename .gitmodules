@@ -1,0 +1,3 @@
+[submodule "lib/cast-receiver-list"]
+	path = lib/cast-receiver-list
+	url = https://github.com/nickspacek/cast-receiver-list.git
