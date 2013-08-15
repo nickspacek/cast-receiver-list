@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app" data-cast-api-enabled="true">
+<head>
+	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="ng-cast-receiver-list.css" rel="stylesheet" />
+
+	<script src="angular.min.js"></script>
+	<script src="ng-cast-receiver-list.js"></script>
+	<script>
+		angular.module('crl').constant('CAST_APP_ID', 'ae241d56-0944-42ed-b6eb-06c314f5b5a0');
+		angular.module('app', [ 'crl' ]);
+	</script>
+</head>
+<body>
+	<h1>Examples</h1>
+	<div class="container">
+		<div class="row" ng-include src="'cast-receiver-list.html'" />
+	</div>
+</body>
+</html>
