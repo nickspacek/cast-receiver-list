@@ -1,43 +1,58 @@
 angular.module('crl', [])
 	.controller('crl.ReceiverCtrl', [ '$scope', 'crl.receiverService', function(scope, receiverService) {
 		scope.receivers = receiverService.receivers;
-		scope.selectReceiver = function (receiverId) {
-			var actual = scope.receivers.filter(function (r) { return r.id == receiverId; })[0];
-			console.debug(actual);
+		scope.selectReceiver = function (id) {
+			receiverService.activateReceiver(id);
+			receiver.active = true;
 		};
 	}])
 	// Used as a central location for the receivers in the list
-	.factory('crl.receiverService', [ 'crl.castApi', 'CAST_APP_ID', function (castApi, appId) {
+	.factory('crl.receiverService', [ '$rootScope', 'crl.castApi', 'CAST_APP_ID', function (rootScope, castApi, appId) {
 		var service = {
 			existingReceiverIds: {},
-			receivers: []
+			receivers: [],
+			activateReceiver: function (id) {
+				var receiver = this.receivers.filter(function (r) { return r.id == id; })[0];
+				if (!receiver) {
+					console.debug('activateReceiver could not find receiver with ID=' + id);
+					return;
+				}
+				receiver.active = true;
+			}
 		};
 		castApi.request().then(function (api) {
 			api.addReceiverListener(appId, function (receivers) {
-				receivers.forEach(function (receiver) {
-					// simplify scope notification
-					if (!service.existingReceiverIds[receiver.id]) {
-						service.receivers.push(receiver);
-						service.existingReceiverIds[receiver.id] = true;
-					}
+				rootScope.$apply(function () {
+					receivers.forEach(function (receiver) {
+						if (!service.existingReceiverIds[receiver.id]) {
+							service.receivers.push(receiver);
+							service.existingReceiverIds[receiver.id] = true;
+						}
+					});
 				});
 			});
 		});
 		return service;
 	}])
 	// Used to create an instance of the Cast API
-	.factory('crl.castApi', [ '$window', '$q', function (window, q) {
+	.factory('crl.castApi', [ '$window', '$q', '$rootScope', function (window, q, rootScope) {
 		var deferred = q.defer();
 		if (typeof cast !== 'undefined' && cast.isAvailable) {
-			deferred.resolve(new cast.Api());
+			resolve(deferred);
 		} else {
 			window.addEventListener('message', function(event) {
 				if (event.source == window && event.data && event.data.source === 'CastApi' && event.data.event === 'Hello') {
-					deferred.resolve(new cast.Api());
+					resolve(deferred);
 				}
 			});
 		}
 		return { request: function () { return deferred.promise; } };
+
+		function resolve(deferred) {
+			rootScope.$apply(function () {
+				deferred.resolve(new cast.Api());
+			});
+		}
 	}])
 	// Used for drawing an "avatar" for the receivers in the list
 	.directive('identicon', function () {
